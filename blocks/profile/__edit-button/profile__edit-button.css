@@ -1,0 +1,19 @@
+.profile__edit-button{
+    background: url(../../../images/edit-button.svg) no-repeat center center;
+    width: 24px;
+    height: 24px;
+    transition: .2s;
+}
+
+.profile__edit-button:hover{
+    opacity: .6;
+}
+
+@media screen and (max-width:550px) {
+    .profile__edit-button{
+        background: url(../../../images/profile__edit-button-mobile.svg) no-repeat center center;
+        width: 18px;
+        height: 18px;
+    }
+}
+

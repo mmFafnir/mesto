@@ -1,0 +1,22 @@
+.form__btn{
+    padding: 14px 0px 18px 0px;
+    border: 0;
+    height: 50px;
+    background: #000;
+    font-size: 18px;
+    font-family: 'Main',Arial,sans-serif;
+    font-weight: 400;
+    color: #fff;
+    transition: .2s;
+}
+
+.form__btn:hover{
+    background: #585858;
+}
+
+@media screen and (max-width:550px) {
+    .form__btn{
+        font-size: 14px;
+        padding: 14px 0px;
+    }
+}
