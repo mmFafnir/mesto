@@ -1,5 +1,5 @@
 @import url(../vendor/normalize.css);
-@import url(../vendor/fonts/font.css);
+@import url(../fonts/font.css);
 @import url(../blocks/body/body.css);
 @import url(../blocks/element/__image/element__image.css);
 @import url(../blocks/element/__like/element__like.css);
@@ -28,13 +28,3 @@
 @import url(../blocks/profile/__info/profile__info.css);
 @import url(../blocks/profile/__title/profile__title.css);
 @import url(../blocks/profile/profile.css);
-
-
-
-
-
-
-
-
-
-

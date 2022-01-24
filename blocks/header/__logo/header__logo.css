@@ -5,11 +5,6 @@
     transition: .2s;
 }
 
-.header__logo:hover{
-    background: url(../images/header-logo-black.svg) no-repeat center center;
-}
-
-
 @media screen and (max-width:880px){
     .header__logo{
         margin-left: 27px;
