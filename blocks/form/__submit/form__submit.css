@@ -1,4 +1,4 @@
-.form__btn{
+.form__submit{
     padding: 14px 0px 18px 0px;
     border: 0;
     height: 50px;
@@ -10,12 +10,12 @@
     transition: .2s;
 }
 
-.form__btn:hover{
+.form__submit:hover{
     background: #585858;
 }
 
 @media screen and (max-width:550px) {
-    .form__btn{
+    .form__submit{
         font-size: 14px;
         padding: 14px 0px;
     }
