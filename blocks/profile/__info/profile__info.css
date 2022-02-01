@@ -17,13 +17,15 @@
         grid-template-columns:  189px 18px;
         align-items: center;
         column-gap: 10px;
-        row-gap: 14px;
+        row-gap: 10px;
     }
 }
 
 @media screen and (max-width:400px){
     .profile__info{
+        row-gap: 6px;
+        column-gap: 1px;
+        grid-template-columns: 100%;
         font-size: 27px;
-        width: 222px;
     }
 }

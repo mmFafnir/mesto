@@ -1,4 +1,10 @@
 .popup__close{
+    padding: 0;
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+    cursor: pointer;
     width: 32px;
     height: 32px;
     background: url(../../../images/popup-close.svg) no-repeat center center;
@@ -9,7 +15,7 @@
 }
 
 .popup__close:hover{
-    background: url(../../../images/popup-close-hover.svg) no-repeat center center;
+    opacity: 0.6;
 }
 
 @media screen and (max-width:550px) {

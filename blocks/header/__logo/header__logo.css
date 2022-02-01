@@ -5,8 +5,17 @@
     transition: .2s;
 }
 
+
 @media screen and (max-width:880px){
     .header__logo{
         margin-left: 27px;
+    }
+}
+
+@media screen and (max-width:550px){
+    .header__logo{
+        width: 103px;
+        height: 24px;
+        background: url(../../../images/logo-mini.svg) no-repeat center center;
     }
 }

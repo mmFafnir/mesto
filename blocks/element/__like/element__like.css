@@ -1,13 +1,15 @@
 .element__like{
+    padding: 0;
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
     display: block;
     width: 22px;
     height: 19px;
     transition: .2s;
     background: url(../../../images/like-unactive.svg) no-repeat center center;
-}
-
-.element__like.active{
-    background: url(../../../images/like-active.svg) no-repeat center center;
+    cursor: pointer;
 }
 
 .element__like:hover{

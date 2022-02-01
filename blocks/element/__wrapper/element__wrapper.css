@@ -1,8 +1,8 @@
-.element-wrapper{
+.element__wrapper{
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 0 auto;
     width: 80%;
-    padding: 25px 0px 30px 0px;
+    padding: 20px 0px 28px 0px;
 }

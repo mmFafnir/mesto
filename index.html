@@ -10,63 +10,62 @@
 <body class="body">
     <header class="header">
         <div class="header__logo"></div>
-        <div class="header__line"></div>
     </header>
     <main>
         <section class="profile">
             <img src="./images/profile-Avatar.png" alt="Аватар профиля" class="profile__avatar">
             <div class="profile__info">
-                <p class="profile__title">
+                <h3 class="profile__title">
                     Жак-Ив Кусто
-                </p>
-                <a href="" onclick="return false;" class="profile__edit-button"></a>
+                </h3>
+                <button type="button" class="profile__edit-button"></button>
                 <p class="profile__description">
                     Исследователь океана
                 </p>
             </div>
-            <a href="#" class="profile__add-button"></a>
+            <button type="button" class="profile__add-button"></button>
         </section>
         <section class="elements">
             <div class="element">
                 <img src="./images/kirill-pershin-1404681-unsplash.png" alt="Картинка карточки" class="element__image">
-                <div class="element-wrapper">
+                <div class="element__wrapper">
                     <h2 class="element__title">Карачаевск</h2>
-                    <a href="" onclick="return false;" class="element__like"></a>
+                    <button type="button" class="element__like"></button>
                 </div>
             </div>
             <div class="element">
                 <img src="./images/kirill-pershin-1556355-unsplash.png" alt="Картинка карточки" class="element__image">
-                <div class="element-wrapper">
+                <div class="element__wrapper">
                     <h2 class="element__title">Гора Эльбрус</h2>
-                    <a href="" onclick="return false;" class="element__like"></a>
+                    <button type="button" class="element__like"></button>
                 </div>
             </div>
             <div class="element">
                 <img src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Картинка карточки" class="element__image">
-                <div class="element-wrapper">
+                <div class="element__wrapper">
                     <h2 class="element__title">Домбай</h2>
-                    <a href="" onclick="return false;" class="element__like"></a>
+                    <button type="button" class="element__like"></button>
                 </div>
             </div>
             <div class="element">
                 <img src="./images/kirill-pershin-1404681-unsplash.png" alt="Картинка карточки" class="element__image">
-                <div class="element-wrapper">
+                <div class="element__wrapper">
                     <h2 class="element__title">Гора Эльбрус</h2>
-                    <a href="" onclick="return false;" class="element__like"></a>
+                    <button type="button" class="element__like"></button>
                 </div>
             </div>
             <div class="element">
                 <img src="./images/kirill-pershin-1556355-unsplash.png" alt="Картинка карточки" class="element__image">
-                <div class="element-wrapper">
+                <div class="element__wrapper">
                     <h2 class="element__title">Домбай</h2>
-                    <a href="" onclick="return false;" class="element__like"></a>
+                    <button type="button" class="element__like"></button>
                 </div>
             </div>
             <div class="element">
                 <img src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Картинка карточки" class="element__image">
-                <div class="element-wrapper">
+                <div class="element__wrapper">
                     <h2 class="element__title">Карачаево-Черкесия</h2>
-                    <a href="" onclick="return false;" class="element__like"></a>
+                    <button type="button" class="element__like"></button>
                 </div>
             </div>
         </section>
@@ -78,13 +77,13 @@
     </footer>
     <div class="popup">
         <div class="popup__container">
-            <a href="#" class="popup__close"></a>
-            <form action="/"   class="form">
+            <button type="button" class="popup__close"></button>
+            <form action="/"   class="form" name="Форма">
                 <h2 class="form__title">
                     Редактировать профиль
                 </h2>
-                <input type="text" class="form__input form__input_name" placeholder="Ваше имя?" value="Жак-Ив Кусто">
-                <input type="text" class="form__input form__input_job" placeholder="Чем занимаетесь?" value="Исследователь океана">
+                <input type="text" class="form__input" placeholder="Ваше имя?" value name="Имя">
+                <input type="text" class="form__input" placeholder="Чем занимаетесь?" value name="Занятие">
                 <button type="submit" class="form__submit">Сохранить</button>
             </form>
         </div>
