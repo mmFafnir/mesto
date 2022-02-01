@@ -1,10 +1,10 @@
 @font-face {
     font-family: 'Main';
-    src: url('../fonts/Inter-Regular.eot');
-    src: url('../fonts/Inter-Regular.otf') format('embedded-opentype'),
-        url('../fonts/Inter-Regular.woff') format('woff'),
-        url('../fonts/Inter-Regular.ttf') format('truetype'),
-        url('../fonts/Inter-Regular.svg') format('svg');
+    src: url('Inter-Regular.eot');
+    src: url('Inter-Regular.otf') format('embedded-opentype'),
+        url('Inter-Regular.woff') format('woff'),
+        url('Inter-Regular.ttf') format('truetype'),
+        url('Inter-Regular.svg') format('svg');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -12,11 +12,11 @@
 
 @font-face {
     font-family: 'Main';
-    src: url('../fonts/Inter-medium.eot');
-    src: url('../fonts/Inter-medium.otf') format('embedded-opentype'),
-        url('../fonts/Inter-medium.woff') format('woff'),
-        url('../fonts/Inter-medium.ttf') format('truetype'),
-        url('../fonts/Inter-medium.svg') format('svg');
+    src: url('Inter-medium.eot');
+    src: url('Inter-medium.otf') format('embedded-opentype'),
+        url('Inter-medium.woff') format('woff'),
+        url('Inter-medium.ttf') format('truetype'),
+        url('Inter-medium.svg') format('svg');
     font-weight: 500;
     font-style: normal;
     font-display: swap;
