@@ -1,8 +1,8 @@
 // Form
 
 let formElement = document.querySelector('.form'),
-    nameInput = document.querySelector('.form__input_name'),
-    jobInput = document.querySelector('.form__input_job'),
+    nameInput = document.getElementsByClassName('form__input')[0],
+    jobInput = document.getElementsByClassName('form__input')[1],
     valueInfo = document.querySelector('.profile__title'),
     valueBusiness = document.querySelector('.profile__description');
 
@@ -24,8 +24,8 @@ let popupOpen = document.querySelector('.profile__edit-button'),
 
 function openPopup(){
     popup.classList.add('popup_opened');
-    nameInput.value = valueInfo.innerText;
-    jobInput.value = valueBusiness.innerText;
+    nameInput.value = valueInfo.textContent.trim();
+    jobInput.value = valueBusiness.textContent.trim();
 }    
 
 function closePopup(){
