@@ -1,8 +1,8 @@
 // Form
 
 let formElement = document.querySelector('.form'),
-    nameInput = document.getElementsByClassName('form__input')[0],
-    jobInput = document.getElementsByClassName('form__input')[1],
+    nameInput = document.getElementById('input-name'),
+    jobInput = document.getElementById('input-business');
     valueInfo = document.querySelector('.profile__title'),
     valueBusiness = document.querySelector('.profile__description');
 
