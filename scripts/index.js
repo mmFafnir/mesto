@@ -1,47 +1,47 @@
 // Popup open and close form description
 
-const popupOpenDescription = document.querySelector('.profile__edit-button'),
-    popupCloseDescription = document.querySelector('#description-close'),
-    popupDescription = document.querySelector('#description');
+const popupOpenProfile = document.querySelector('.profile__edit-button'),
+    popupCloseProfile = document.querySelector('#description-close'),
+    popupProfile = document.querySelector('#description');
 
-function initialPopup(){
+function createPopup(){
     nameInput.value = nameInfo.textContent.trim();
     jobInput.value = jobInfo.textContent.trim();
-    openPopup(popupDescription);
+    openPopup(popupProfile);
 };    
 
 
 
-popupOpenDescription.addEventListener('click', initialPopup);
+popupOpenProfile.addEventListener('click', createPopup);
 
-popupCloseDescription.addEventListener('click',function() {
-    closePopup(popupDescription);
+popupCloseProfile.addEventListener('click',function() {
+    closePopup(popupProfile);
 });
 
 // Form decription
 
-function openPopup(evt) {
-    evt.classList.add('popup_opened');
+function openPopup(element) {
+    element.classList.add('popup_opened');
 }
 
 function closePopup(evt) {
     evt.classList.remove('popup_opened');
 }
 
-const formElementDescription = document.querySelector('#description-form'),
+const formProfileElement = document.querySelector('#description-form'),
     nameInput = document.querySelector('#input-name'),
     jobInput = document.querySelector('#input-business');
     nameInfo = document.querySelector('.profile__title'),
     jobInfo = document.querySelector('.profile__description');
 
-function formSubmitHandlerDescription (evt) { 
+function formSubmitProfileHandler (evt) { 
     evt.preventDefault();
     nameInfo.textContent = nameInput.value;
     jobInfo.textContent = jobInput.value;
-    closePopup(popupDescription);
+    closePopup(popupProfile);
 };
 
-formElementDescription.addEventListener('submit',formSubmitHandlerDescription);
+formProfileElement.addEventListener('submit',formSubmitProfileHandler);
 
 
 
@@ -55,10 +55,10 @@ const formElementCards = document.querySelector('#cards-form'),
     popupCloseCards = document.querySelector('#cards-close'),
     elements = document.querySelector('.elements');
 
-function CardsformSubmitHandler (evt) {
+function cardsformSubmitHandler (evt) {
     evt.preventDefault();
 
-    let item = [];
+    const item = [];
     item.name = inputCard.value;
     item.link = inputImage.value;
 
@@ -71,7 +71,7 @@ function CardsformSubmitHandler (evt) {
 
 
 
-formElementCards.addEventListener('submit',CardsformSubmitHandler);
+formElementCards.addEventListener('submit',cardsformSubmitHandler);
 
 popupOpenCards.addEventListener('click',function() {
     openPopup(popupCards);
@@ -97,10 +97,10 @@ function handleOpenImage (item) {
     imageBody.src = item.target.src;
     imageBody.alt = item.target.alt;
     imageTitle.textContent = item.target.alt;
-    imagePopup.classList.add('popup_opened')
+    openPopup(imagePopup);
 }
 
-function initialCards () {
+function downloadCards () {
     const initialCards = [
         {
           name: 'Архыз',
@@ -164,6 +164,6 @@ function createCard (item) {
     return cardElement;
 }
 
-initialCards();
+downloadCards();
 
 
