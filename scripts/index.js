@@ -12,6 +12,7 @@ function createPopup(){
 
 
 
+
 popupOpenProfile.addEventListener('click', createPopup);
 
 popupCloseProfile.addEventListener('click',function() {
@@ -33,16 +34,18 @@ const formProfileElement = document.querySelector('#description-form'),
     jobInput = document.querySelector('#input-business');
     nameInfo = document.querySelector('.profile__title'),
     jobInfo = document.querySelector('.profile__description');
+    formInputsProfile = [nameInput,jobInput];
 
 function formSubmitProfileHandler (evt) { 
+    console.log(formInputsProfile);  
     evt.preventDefault();
     nameInfo.textContent = nameInput.value;
     jobInfo.textContent = jobInput.value;
+       
     closePopup(popupProfile);
 };
 
 formProfileElement.addEventListener('submit',formSubmitProfileHandler);
-
 
 
 //Form cards
@@ -98,6 +101,7 @@ function handleOpenImage (item) {
     imageBody.alt = item.target.alt;
     imageTitle.textContent = item.target.alt;
     openPopup(imagePopup);
+    open(imagePopup); // Добавил закрытие popup на overlayа
 }
 
 function downloadCards () {
@@ -166,4 +170,45 @@ function createCard (item) {
 
 downloadCards();
 
+
+// Закрываем popup с помощью ESC
+
+
+
+
+function open(popup) {
+    popup.classList.add('popup_opened');
+    document.addEventListener('keydown',handleEscClose);
+    document.addEventListener('mousedown', closePopupMousedown);
+}
+
+
+function close(popup) {
+    popup.classList.remove('popup_opened');
+    document.removeEventListener('keydown',handleEscClose.bind(popup));
+    document.removeEventListener('mousedown', closePopupMousedown);
+}
+
+
+function handleEscClose(evt) {
+    console.log(evt);
+    if (evt.keyCode == 27) {
+        close(popup);
+    }
+}
+
+function closePopupMousedown(evt) {
+    if (evt.target.classList.contains('popup_opened')) {
+        close(evt.target);
+    }
+}
+
+
+popupOpenProfile.addEventListener('click', () => {
+    open(popupProfile)
+})
+
+popupOpenCards.addEventListener('click',() => {
+    open(popupCards);
+})
 
