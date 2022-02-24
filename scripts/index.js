@@ -173,9 +173,6 @@ downloadCards();
 
 // Закрываем popup с помощью ESC
 
-
-
-
 function open(popup) {
     popup.classList.add('popup_opened');
     document.addEventListener('keydown',handleEscClose);
