@@ -12,6 +12,7 @@
 @import url(../blocks/footer/__text/footer__text.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/form/__submit/form__submit.css);
+@import url(../blocks/form/__field/form__field.css);
 @import url(../blocks/form/__submit/_inactive/form__submit_inactive.css);
 @import url(../blocks/form/__input/form__input.css);
 @import url(../blocks/form/__input/_type_error/form__input_type_erorr.css);

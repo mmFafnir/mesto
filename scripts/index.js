@@ -172,6 +172,7 @@ downloadCards();
 
 
 // Закрываем popup с помощью ESC
+const popupList = Array.from(document.querySelectorAll('.popup'));
 
 function open(popup) {
     popup.classList.add('popup_opened');
@@ -180,9 +181,13 @@ function open(popup) {
 }
 
 
-function close(popup) {
-    popup.classList.remove('popup_opened');
-    document.removeEventListener('keydown',handleEscClose.bind(popup));
+function close() {
+    popupList.forEach((popupElement) => {
+        if (popupElement.classList.contains('popup_opened')) {
+            popupElement.classList.remove('popup_opened');
+        }
+    })
+    document.removeEventListener('keydown',handleEscClose.bind);
     document.removeEventListener('mousedown', closePopupMousedown);
 }
 
@@ -190,13 +195,13 @@ function close(popup) {
 function handleEscClose(evt) {
     console.log(evt);
     if (evt.keyCode == 27) {
-        close(popup);
+        close();
     }
 }
 
 function closePopupMousedown(evt) {
     if (evt.target.classList.contains('popup_opened')) {
-        close(evt.target);
+        close();
     }
 }
 

@@ -50,10 +50,14 @@
                 <h2 class="form__title">
                     Редактировать профиль
                 </h2>
-                <input type="text" class="form__input" placeholder="Ваше имя?" value name="Title" id="input-name" required minlength="2" maxlength="40">
-                <span class="input-name-error form__input-error"></span>
-                <input type="text" class="form__input" placeholder="Чем занимаетесь?" value name="Business" id="input-business" required minlength="2" maxlength="200">
-                <span class="input-business-error form__input-error"></span>
+                <label class="form__field">
+                    <input type="text" class="form__input" placeholder="Ваше имя?" value name="Title" id="input-name" required minlength="2" maxlength="40">
+                    <span class="input-name-error form__input-error"></span>
+                </label>
+                <label class="form__field">
+                    <input type="text" class="form__input" placeholder="Чем занимаетесь?" value name="Business" id="input-business" required minlength="2" maxlength="200">
+                    <span class="input-business-error form__input-error"></span>
+                </label>
                 <button type="submit" class="form__submit" >Сохранить</button>
             </form>
         </div>
@@ -65,10 +69,14 @@
                 <h2 class="form__title">
                     Новое место
                 </h2>
-                <input type="text" class="form__input" placeholder="Название" value name="Name" id="input-card" minlength="2" maxlength="30" required>
-                <span class="input-card-error form__input-error"></span>
-                <input type="url" class="form__input" placeholder="Ссылка на картинку" value name="Business" id="input-image"  required>
-                <span class="input-image-error form__input-error"></span>
+                <label class="form__field">
+                    <input type="text" class="form__input" placeholder="Название" value name="Name" id="input-card" minlength="2" maxlength="30" required>
+                    <span class="input-card-error form__input-error"></span>
+                </label>
+                <label class="form__field">
+                    <input type="url" class="form__input" placeholder="Ссылка на картинку" value name="Business" id="input-image"  required>
+                    <span class="input-image-error form__input-error"></span>
+                </label>
                 <button type="submit" class="form__submit" >Создать</button>
             </form>
         </div>
