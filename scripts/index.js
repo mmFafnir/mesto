@@ -58,7 +58,7 @@ const formProfileElement = document.querySelector('#description-form'),
     jobInput = document.querySelector('#input-business');
     nameInfo = document.querySelector('.profile__title'),
     jobInfo = document.querySelector('.profile__description');
-    formInputsProfile = [nameInput,jobInput];
+    formInputsProfile = [nameInput,jobInput],
 
 function submitFormProfileHandler (evt) { 
     console.log(formInputsProfile);  
@@ -84,7 +84,7 @@ const formCardsElement = document.querySelector('#cards-form'),
 function submitFormCardsHandler (evt) {
     evt.preventDefault();
 
-    const item = [];
+    const item = {};
     item.name = inputCard.value;
     item.link = inputImage.value;
 
