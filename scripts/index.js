@@ -32,7 +32,7 @@ function closePopupMousedown(evt) {
 const popupOpenProfile = document.querySelector('.profile__edit-button'),
     popupProfile = document.querySelector('#description');
 
-function openPopupProfile(){
+function openProfilePopup(){
     nameInput.value = nameInfo.textContent.trim();
     jobInput.value = jobInfo.textContent.trim();
     openPopup(popupProfile);
@@ -41,7 +41,7 @@ function openPopupProfile(){
 
 
 
-popupOpenProfile.addEventListener('click', openPopupProfile);
+popupOpenProfile.addEventListener('click', openProfilePopup);
 
 
 // Form decription
