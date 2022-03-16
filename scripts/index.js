@@ -183,7 +183,7 @@ const selectorsForm = {
 };
 
 
-const form1 = new FormValidator(selectorsForm, '.form1');
+const form1 = new FormValidator(selectorsForm, '.form-one');
 form1.enableValidation()
-const form2 = new FormValidator(selectorsForm, '.form2');
+const form2 = new FormValidator(selectorsForm, '.form-two');
 form2.enableValidation()
