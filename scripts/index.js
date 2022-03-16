@@ -92,7 +92,8 @@ function handleCardsFormSubmit (evt) {
     item.name = inputCard.value;
     item.link = inputImage.value;
 
-    addCard(new Card(item, '#element-template'));
+    const card = new Card(item, '#element-template');
+    addCard(card.createCard());
 
     inputCard.value = '';
     inputImage.value = '';
@@ -149,8 +150,9 @@ function downloadCards () {
           link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
         }
       ];
-    initialCards.forEach(function(item){
-        addCard(new Card(item, '#element-template'));
+    initialCards.forEach((item, index) => {
+        const card = new Card(item, '#element-template') 
+        addCard(card.createCard());
     })
 }
 
@@ -183,7 +185,7 @@ const selectorsForm = {
 };
 
 
-const form1 = new FormValidator(selectorsForm, '.form-one');
+const form1 = new FormValidator(selectorsForm, '.form1');
 form1.enableValidation()
-const form2 = new FormValidator(selectorsForm, '.form-two');
+const form2 = new FormValidator(selectorsForm, '.form2');
 form2.enableValidation()
