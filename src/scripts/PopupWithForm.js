@@ -4,9 +4,9 @@ import Popup from './Popup.js'
 export default class PopupWithForm extends Popup {
     
     constructor(selector, callback) {
+
         super(selector);
-        // this.popup = super.popup    
-        // this.popup = document.querySelector(selector);
+
         this.callback = callback
         this.inputs = this.popup.querySelectorAll('input')
         this.form = this.popup.querySelector('form')
@@ -14,7 +14,7 @@ export default class PopupWithForm extends Popup {
     }   
 
     close() {
-        this.popup.classList.remove('popup_opened');
+        super.close();
         setTimeout(() => {
             this.inputs.forEach(input => input.value = '');
         }, 0);
@@ -31,19 +31,10 @@ export default class PopupWithForm extends Popup {
     }
 
     setEventListeners() {       
-        this.popup.addEventListener('click', (e) => {
-            const target = e.target;
-            if(target.classList.contains('popup_opened') || target.classList.contains('popup__close')){
-                this.close()
-            }
-
-        }) 
-        console.log(this.form)
+        super.setEventListeners();
         this.form.addEventListener('submit', (e) => {
             this.callback();
             this.close();
-            
-
         }) 
 
     }
