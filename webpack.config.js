@@ -10,13 +10,15 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'main.js',
-        publicPath: ''
+    publicPath: ''
   },
-    mode: 'development',
+  mode: 'development',
   devServer: {
-    contentBase: path.resolve(__dirname, './dist'),
+    static: {
+      directory: path.resolve(__dirname, 'dist'),
+    },
     compress: true,
-    port: 8080,
+    port: 3000,
     open: true
   },
   module: {
@@ -42,6 +44,7 @@ module.exports = {
        // Добавьте postcss-loader
       'postcss-loader']
       }
+    
     ]
   },
   plugins: [
@@ -52,3 +55,5 @@ module.exports = {
     new MiniCssExtractPlugin() 
   ]
 }; 
+
+
