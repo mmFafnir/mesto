@@ -1,16 +1,16 @@
 
 import './pages/index.css'; 
 
-
-
 import Section from './scripts/Section.js'
 import Card from './scripts/Card.js'
 import FormValidator from './scripts/FormValidator.js'
 
-import { PopupWithForm, PopupWithImage } from './scripts/Popup.js';
+import PopupWithImage from './scripts/PopupWithImage.js';
+import PopupWithForm from './scripts/PopupWithForm.js';
 
 import UserInfo from './scripts/UserInfo.js';
 
+import { initialCards, selectorsForm } from './utils/constants'
 
 
 export const user = new UserInfo({
@@ -20,47 +20,23 @@ export const user = new UserInfo({
 
 
 const handleCardClick = (item) => {
-
   popupImages.open(item);
-  popupImages.setEventListeners();  
 }
 
+const createCard = (item) => {  
+  const card = new Card(item, '#element-template', handleCardClick);
+  return card.createCard()
+}
+
+  
+let cardsSection; //Создаю переменную cardsSection, для того чтобы получить к ней доступ во всем документе.
 
 function downloadCards () {
-    const initialCards = [
-        {
-          name: 'Архыз',
-          link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-        },
-        {
-          name: 'Челябинская область',
-          link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-        },
-        {
-          name: 'Иваново',
-          link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-        },
-        {
-          name: 'Камчатка',
-          link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-        },
-        {
-          name: 'Холмогорский район',
-          link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-        },
-        {
-          name: 'Байкал',
-          link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-        }
-      ];
-    
-    
-      
+
         let templateCatds = []  
 
-        initialCards.forEach((item, index) => {
-          const card = new Card(item, '#element-template', handleCardClick) 
-          templateCatds.push(card.createCard());
+        initialCards.forEach((item) => {
+          templateCatds.push(createCard(item));
         })
 
         cardsSection = new Section({
@@ -74,23 +50,22 @@ function downloadCards () {
 }
 
 const popupImages = new PopupWithImage('#image');
+popupImages.setEventListeners();  
 const popupUser = new PopupWithForm('#description', () => {
-
-    const nameInput = document.querySelector('#input-name');
-    const jobInput = document.querySelector('#input-business');
-
-    user.setUserInfo(nameInput.value, jobInput.value)
-
+    const values = popupUser.getInputValues() 
+    user.setUserInfo(values.Title, values.Business)
 });
+popupUser.setEventListeners();
+
 const popupAddCard = new PopupWithForm('#cards', function(){
   
-  const item = this._getInputValues()
+  const item = this.getInputValues()
   console.log(item)
   const card = new Card(item, '#element-template', handleCardClick)
   
   cardsSection.addItem(card.createCard())
 })
-let cardsSection; 
+popupAddCard.setEventListeners();
 downloadCards();
 
 
@@ -98,14 +73,7 @@ downloadCards();
 
 
 
-const selectorsForm = { 
-    formSelector: '.form', 
-    inputSelector: '.form__input', 
-    submitButtonSelector: '.form__submit', 
-    inactiveButtonClass: 'form__submit_inactive', 
-    inputErrorClass: 'form__input_type_error', 
-    errorClass: 'form__input-error_visible' 
-}
+
 
 
 
@@ -115,12 +83,12 @@ const selectorsForm = {
 const btnPopupUser = document.querySelector('.profile__edit-button');
 const btnPopupCard = document.querySelector('.profile__add-button')
 
+
+const nameInput = document.querySelector('#input-name');
+const jobInput = document.querySelector('#input-business');
+
 btnPopupUser.addEventListener('click', () => {
     popupUser.open();
-    popupUser.setEventListeners();
-
-    const nameInput = document.querySelector('#input-name');
-    const jobInput = document.querySelector('#input-business');
 
     const userInf = user.getUserInfo() 
     nameInput.value = userInf.name.trim();
@@ -129,7 +97,7 @@ btnPopupUser.addEventListener('click', () => {
 
 btnPopupCard.addEventListener('click', () => {
   popupAddCard.open();
-  popupAddCard.setEventListeners();
+  
 })
 
 
