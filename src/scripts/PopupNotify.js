@@ -17,6 +17,7 @@ export default class PopupNotify extends Popup {
     setEventListeners() {
         super.setEventListeners();
         this.btnSubmit.addEventListener('click', async (evt) => {
+            evt.preventDefault()
             await this.callback();
             await document.getElementById(this.id).remove()
             await this.close();
