@@ -1,178 +1,174 @@
 
 
-import './pages/index.css';
+    import './index.css';
 
-import Api from './scripts/Api.js';
-import Section from './scripts/Section.js';
-import Card from './scripts/Card.js';
-import FormValidator from './scripts/FormValidator.js';
+    import Api from '../components/Api.js';
+    import Section from '../components/Section.js';
+    import Card from '../components/Card.js';
+    import FormValidator from '../components/FormValidator.js';
 
-import PopupWithImage from './scripts/PopupWithImage.js';
-import PopupWithForm from './scripts/PopupWithForm.js';
-import PopupNotify from './scripts/PopupNotify.js';
+    import PopupWithImage from '../components/PopupWithImage.js';
+    import PopupWithForm from '../components/PopupWithForm.js';
+    import PopupNotify from '../components/PopupNotify.js';
 
-import UserInfo from './scripts/UserInfo.js';
+    import UserInfo from '../components/UserInfo.js';
 
-import { initialCards, selectorsForm } from './utils/constants'
+    import { initialCards, selectorsForm } from '../utils/constants'
 
-export const user = new UserInfo({
+    const user = new UserInfo({
 
-  name: '.profile__title',
-  about: '.profile__description',
-  avatar: '.profile__avatar'
-})
+      name: '.profile__title',
+      about: '.profile__description',
+      avatar: '.profile__avatar'
+    })
 
-export const cardsApi = new Api({
-    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-39/cards',
-    headers: {
-        authorization: '446e7ea3-0df9-437f-a6c2-d22adf8a9199',
-        'Content-Type': 'application/json'
+    const cardsApi = new Api({
+        baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-39/cards',
+        headers: {
+            authorization: '446e7ea3-0df9-437f-a6c2-d22adf8a9199',
+            'Content-Type': 'application/json'
+        }
+    })
+
+    const userApi = new Api({
+        baseUrl: 'https://nomoreparties.co/v1/cohort-39/users/me',
+        headers: {
+            authorization: '446e7ea3-0df9-437f-a6c2-d22adf8a9199',
+            'Content-Type': 'application/json'
+        }
+    })
+    async function fetchUser  () {
+        const userObj = await userApi.getInitial();
+        const userData = await userObj.data
+        if(userObj.status){
+            user.id = await userData._id;
+            await user.setUserInfo(
+                userData.name,
+                userData.about,
+
+            )
+            await user.setUserAvatar(userData.avatar)
+
+        }
     }
-})
+    fetchUser()
 
-const userApi = new Api({
-    baseUrl: 'https://nomoreparties.co/v1/cohort-39/users/me',
-    headers: {
-        authorization: '446e7ea3-0df9-437f-a6c2-d22adf8a9199',
-        'Content-Type': 'application/json'
+
+
+    const handleCardClick = (item) => {
+      popupImages.open(item);
     }
-})
 
-const avatarApi = new Api({
-    baseUrl: 'https://nomoreparties.co/v1/cohort-39/users/me/avatar',
-    headers: {
-        authorization: '446e7ea3-0df9-437f-a6c2-d22adf8a9199',
-        'Content-Type': 'application/json'
+    const createCard = (item) => {
+      const card = new Card(item, '#element-template', handleCardClick, popupCardDelete, user, cardsApi);
+      return card.createCard()
     }
-})
-
-async function fetchUser  () {
-    const userObj = await userApi.getInitial();
-    await console.log(userObj)
-    user.id = await userObj._id;
-    await user.setUserInfo(
-        userObj.name,
-        userObj.about,
-
-    )
-    await user.setUserAvatar(userObj.avatar)
-}
-fetchUser()
 
 
+    let cardsSection; //Создаю переменную cardsSection, для того чтобы получить к ней доступ во всем документе.
 
-const handleCardClick = (item) => {
-  popupImages.open(item);
-}
+    //console.log(cardsApi.getInitialCards)
 
-const createCard = (item) => {
-  const card = new Card(item, '#element-template', handleCardClick);
-  return card.createCard()
-}
+    async function downloadCards () {
 
+            let templateCatds = [];
+            const cards = await cardsApi.getInitial();
+            const cardsData = await cards.data
 
-let cardsSection; //Создаю переменную cardsSection, для того чтобы получить к ней доступ во всем документе.
-
-//console.log(cardsApi.getInitialCards)
-
-async function downloadCards () {
-
-        let templateCatds = [];
-
-        const cards = await cardsApi.getInitial();
-        await cards.forEach((item) => {
-          templateCatds.push(createCard(item));
-        })
-
-        cardsSection = await new Section({
-            items: templateCatds,
-            renderer: (item, container) => {
-                container.prepend(item);
+            if(cards.status){
+                await cardsData.forEach((item) => {
+                  templateCatds.push(createCard(item));
+                })
             }
-        }, '.elements')
 
-        await cardsSection.renderAll();
-}
+            cardsSection = await new Section({
+                items: templateCatds,
+                renderer: (item, container) => {
+                    container.prepend(item);
+                }
+            }, '.elements')
 
-const popupImages = new PopupWithImage('#image');
-popupImages.setEventListeners();
-const popupUser = new PopupWithForm('#description', async function () {
-    const values = await this.getInputValues();
-    const statusPatch = await userApi.PATCH({
-       name: values.Title,
-       about: values.Business
-    });
-    if(statusPatch){
-        await user.setUserInfo(values.Title, values.Business);
-        return statusPatch
+            await cardsSection.renderAll();
     }
 
-});
-popupUser.setEventListeners();
+    const popupImages = new PopupWithImage('#image');
+    popupImages.setEventListeners();
+    const popupUser = new PopupWithForm('#description', async function () {
+        const values = await popupUser.getInputValues();
+        const userPatch = await userApi.PATCH({
+           name: values.Title,
+           about: values.Business
+        });
+        if(userPatch.status){
+            await user.setUserInfo(values.Title, values.Business);
+            return true
+        }
 
-const popupAvatar = new PopupWithForm('#popup-avatar', async function(){
-    const value = await this.getInputValues();
-    const statusPatch = await avatarApi.PATCH({
-        avatar: value.link
     });
-    if(statusPatch) {
-        await user.setUserAvatar(value.link);
-        return statusPatch
-    }
-});
-popupAvatar.setEventListeners()
+    popupUser.setEventListeners();
 
-export const popupCardDelete = new PopupNotify('#delete-notify', function() {
-    cardsApi.DELETE(this.id)
-});
-popupCardDelete.setEventListeners();
+    const popupAvatar = new PopupWithForm('#popup-avatar', async function(){
+        const value = await popupAvatar.getInputValues();
+        const avatarPatch = await userApi.PATCH({
+            avatar: value.link
+        }, 'avatar');
+        if(avatarPatch.status) {
+            await user.setUserAvatar(value.link);
+            return true
+        }
+    });
+    popupAvatar.setEventListeners()
 
-
-const popupAddCard = new PopupWithForm('#cards', async function (){
-  const {name, link} = await this.getInputValues();
-  const item = await cardsApi.POST({
-    name, link
-  });
-  if(item){
-    await cardsSection.addItem(createCard(item));
-    return true
-  }
-  return false
-
-})
-popupAddCard.setEventListeners();
-downloadCards();
+    const popupCardDelete = new PopupNotify('#delete-notify', function() {
+        cardsApi.DELETE(popupCardDelete.id)
+    });
+    popupCardDelete.setEventListeners();
 
 
-const btnPopupUser = document.querySelector('.profile__edit-button');
-const btnPopupCard = document.querySelector('.profile__add-button');
-const btnPopupAvatar = document.querySelector('.profile__avatar');
-
-const nameInput = document.querySelector('#input-name');
-const jobInput = document.querySelector('#input-business');
-
-btnPopupUser.addEventListener('click', () => {
-    popupUser.open();
-
-    const userInf = user.getUserInfo()
-    nameInput.value = userInf.name.trim();
-    jobInput.value = userInf.about.trim();
-})
-
-btnPopupCard.addEventListener('click', () => {
-  popupAddCard.open();
-})
-
-btnPopupAvatar.addEventListener('click', () => {
-    popupAvatar.open()
-})
+    const popupAddCard = new PopupWithForm('#cards', async function (){
+      const {name, link} = await popupAddCard.getInputValues();
+      const item = await cardsApi.POST({
+        name, link
+      });
+      if(item.status){
+        await cardsSection.addItem(createCard(item.data));
+        return true
+      }
+      return false
+    })
+    popupAddCard.setEventListeners();
+    downloadCards();
 
 
+    const btnPopupUser = document.querySelector('.profile__edit-button');
+    const btnPopupCard = document.querySelector('.profile__add-button');
+    const btnPopupAvatar = document.querySelector('.profile__avatar');
 
-const form1 = new FormValidator(selectorsForm, '.form-one');
-form1.enableValidation()
-const form2 = new FormValidator(selectorsForm, '.form-two');
-form2.enableValidation()
+    const nameInput = document.querySelector('#input-name');
+    const jobInput = document.querySelector('#input-business');
+
+    btnPopupUser.addEventListener('click', () => {
+        popupUser.open();
+
+        const userInf = user.getUserInfo()
+        nameInput.value = userInf.name.trim();
+        jobInput.value = userInf.about.trim();
+    })
+
+    btnPopupCard.addEventListener('click', () => {
+      popupAddCard.open();
+    })
+
+    btnPopupAvatar.addEventListener('click', () => {
+        popupAvatar.open()
+    })
+
+
+
+    const form1 = new FormValidator(selectorsForm, '.form-one');
+    form1.enableValidation()
+    const form2 = new FormValidator(selectorsForm, '.form-two');
+    form2.enableValidation()
 
 
 
