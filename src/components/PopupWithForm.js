@@ -25,7 +25,6 @@ export default class PopupWithForm extends Popup {
 
     getInputValues() { 
         const inputValues = {};
-
         this.inputs.forEach(input => {
             inputValues[input.name] = input.value
         });
@@ -35,16 +34,13 @@ export default class PopupWithForm extends Popup {
     setEventListeners() {       
         super.setEventListeners();
         this.form.addEventListener('submit', async (e) => {
-            e.preventDefault();
+
             this.btnSubmit.innerHTML = 'Сохранить...';
             this.btnSubmit.disabled = true;
-            const status = await this.callback();
-            if(status){
-                this.close();
-                this.btnSubmit.disabled = false;
-                this.btnSubmit.innerHTML = 'Сохранить';
-            }
-        })
 
+            this.callback()
+;
+
+        })
     }
 }   
