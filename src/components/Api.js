@@ -8,8 +8,41 @@ export default class Api {
 
     }
 
-    getInitial() {
-        return fetch(this.baseUrl, {
+    getInitialCards() {
+        return this._getInitial('cards')
+    }
+
+    addCard(body) {
+        return this._POST('cards', body);
+    }
+
+    deleteCard(id){
+       return this._DELETE(`cards/${id}`)
+    }
+
+    addCardLike(path, body){
+       return this._PUT(`cards/${path}`, body)
+    }
+
+    removeCardLike(path){
+        return this._DELETE(`cards/${path}`)
+
+    }
+
+    getUserData() {
+        return this._getInitial('users/me')
+    }
+
+    updateUserInfo(body) {
+        return this._PATCH(body, `users/me`)
+    }
+
+    updateAvatar(body){
+        return this._PATCH(body, `users/me/avatar`)
+    }
+
+    _getInitial(path) {
+        return fetch(this.baseUrl + path, {
             headers: this.headers
 
          }).then(res => {
@@ -20,7 +53,7 @@ export default class Api {
 
     }
 
-    PATCH(body, path) {
+    _PATCH(body, path) {
         path = path != undefined ? `/${path}` : '/';
         return fetch(this.baseUrl + path, {
           method: 'PATCH',
@@ -29,8 +62,8 @@ export default class Api {
         }).then(res => this._checkResponse(res))
     }
 
-    POST(body) {
-        return fetch(this.baseUrl, {
+    _POST(path, body) {
+        return fetch(this.baseUrl+path, {
             method: 'POST',
             headers: this.headers,
             body: JSON.stringify(body)
@@ -40,8 +73,8 @@ export default class Api {
         })
     }
 
-    DELETE(id) {
-        return fetch(`${this.baseUrl}/${id}`, {
+    _DELETE(path) {
+        return fetch(this.baseUrl + path, {
             method: 'DELETE',
             headers: this.headers,
         }).then(res => {
@@ -51,7 +84,7 @@ export default class Api {
         })
     }
 
-    PUT(id, body){
+    _PUT(id, body){
         return fetch(`${this.baseUrl}/${id}`, {
             method: 'PUT',
             headers: this.headers,
@@ -59,18 +92,17 @@ export default class Api {
         }).then(res => {
             return this._checkResponse(res);
         }).then((result) => {
+            console.log(result)
             return result
         })
     }
 
-    async _checkResponse(res) {
+    _checkResponse(res) {
         if(res.ok){
-            const data = await res.json()
-            return { data: data, status: true}
+            return res.json()
         }
         return { data: Promise.reject(`Ошибка: ${res.status}`), status: false}
     }
-
 }
 
 
