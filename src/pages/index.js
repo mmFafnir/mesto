@@ -81,7 +81,6 @@
 
     const popupUser = new PopupWithForm('#description', function () {
         const values = popupUser.getInputValues();
-        validatorProfile.disableSubmitButton();
          api.updateUserInfo({
            name: values.Title,
            about: values.Business
@@ -102,7 +101,6 @@
 
     const popupAvatar = new PopupWithForm('#popup-avatar',function(){
         const value = popupAvatar.getInputValues();
-        validatorAvatar.disableSubmitButton();
         api.updateAvatar({
             avatar: value.link
         }).then((userData) => {
@@ -120,9 +118,6 @@
     popupAvatar.setEventListeners()
 
     const popupCardDelete = new PopupNotify('#delete-notify', function() {
-        popupCardDelete.btnSubmit.setAttribute('disabled',true);
-        validatorAvatar.disableSubmitButton();
-        popupCardDelete.btnSubmit.classList.add(selectorsForm.inactiveButtonClass)
         api.deleteCard(popupCardDelete.id)
         .then(() => {
             popupCardDelete.btnSubmit.removeAttribute('disabled',true);
@@ -136,7 +131,6 @@
 
 
     const popupAddCard = new PopupWithForm('#cards', function (){
-      validatorCards.disableSubmitButton();
       const {name, link} = popupAddCard.getInputValues();
 
       api.addCard({name, link})
