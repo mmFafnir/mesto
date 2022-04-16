@@ -121,7 +121,6 @@
         api.deleteCard(popupCardDelete.id)
         .then(() => {
             popupCardDelete.btnSubmit.removeAttribute('disabled',true);
-            popupCardDelete.btnSubmit.classList.remove(selectorsForm.inactiveButtonClass)
             document.getElementById(popupCardDelete.id).remove()
             popupCardDelete.close();
         })
